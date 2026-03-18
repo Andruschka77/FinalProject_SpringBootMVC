@@ -2,6 +2,7 @@ package com.example.FinalProject_SpringBootMVC.controller;
 
 import com.example.FinalProject_SpringBootMVC.model.Pet;
 import com.example.FinalProject_SpringBootMVC.service.PetService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PetController {
 
     @PostMapping
     public ResponseEntity<Pet> createPet(
-            @RequestBody Pet pet
+            @Valid @RequestBody Pet pet
     ) {
         var createdPet = petService.createPet(pet);
         return ResponseEntity
@@ -39,7 +40,7 @@ public class PetController {
     @PutMapping("/{id}")
     public ResponseEntity<Pet> updatePet(
             @PathVariable("id") Long petId,
-            @RequestBody Pet pet
+            @Valid @RequestBody Pet pet
     ) {
         var updatePet = petService.updatePet(petId, pet);
         return ResponseEntity
@@ -56,4 +57,5 @@ public class PetController {
                 .status(HttpStatus.NO_CONTENT)
                 .build();
     }
+
 }

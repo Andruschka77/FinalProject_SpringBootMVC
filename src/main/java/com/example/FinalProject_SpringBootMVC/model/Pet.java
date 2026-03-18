@@ -1,8 +1,18 @@
 package com.example.FinalProject_SpringBootMVC.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class Pet {
+
     private Long id;
+
+    @NotBlank
+    @Size(min=3, max=20)
     private final String name;
+
+    @NotNull
     private final Long userId;
 
     public Pet(
@@ -26,4 +36,5 @@ public class Pet {
     public Long getUserId() {
         return userId;
     }
+
 }

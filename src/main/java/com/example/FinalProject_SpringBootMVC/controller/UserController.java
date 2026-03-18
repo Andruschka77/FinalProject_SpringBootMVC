@@ -1,7 +1,9 @@
 package com.example.FinalProject_SpringBootMVC.controller;
 
 import com.example.FinalProject_SpringBootMVC.model.User;
+import com.example.FinalProject_SpringBootMVC.service.UserPetService;
 import com.example.FinalProject_SpringBootMVC.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +13,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final UserPetService userPetService;
 
-    public UserController(UserService userService) {
+    public UserController(
+            UserService userService, UserPetService userPetService
+    ) {
         this.userService = userService;
+        this.userPetService = userPetService;
     }
 
     @PostMapping
     public ResponseEntity<User> createUser(
-            @RequestBody User user
+            @Valid @RequestBody User user
     ) {
         var createdUser = userService.createUser(user);
         return ResponseEntity
@@ -39,7 +45,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable("id") Long userId,
-            @RequestBody User user
+            @Valid @RequestBody User user
     ) {
         var updatedUser = userService.updateUser(userId, user);
         return ResponseEntity
@@ -51,9 +57,10 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(
             @PathVariable("id") Long userId
     ) {
-        userService.deleteUser(userId);
+        userPetService.deleteUserWithPets(userId);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .build();
     }
+
 }
