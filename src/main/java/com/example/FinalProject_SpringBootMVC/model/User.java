@@ -20,18 +20,20 @@ public class User {
     @Max(100)
     private final Integer age;
 
-    private final List<Pet> pets = new ArrayList<>();
+    private final List<Pet> pets;
 
     public User(
             Long id,
             String name,
             String email,
-            Integer age
+            Integer age,
+            List<Pet> pets
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.pets = pets;
     }
 
     public Long getId() {

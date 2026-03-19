@@ -74,16 +74,4 @@ public class GlobalExceptionHandler {
                 .body(error);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<ErrorMessageResponse> handleAllException(Exception ex) {
-//        var error = new ErrorMessageResponse(
-//                "Внутренняя ошибка сервера",
-//                "INTERNAL_ERROR"
-//        );
-//
-//        return ResponseEntity
-//                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                .body(error);
-//    }
-
 }

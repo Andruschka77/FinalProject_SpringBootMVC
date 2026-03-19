@@ -21,7 +21,7 @@ public class PetService {
 
     public Pet createPet(Pet pet) {
         if (pet.getUserId() < 0) {
-            throw new ValidationException("Id пользователя не может быть отрицательным!");
+            throw new ValidationException("Id питомца не может быть отрицательным!");
         }
         User user = userService.findUserById(pet.getUserId());
         var newPet = new Pet(
@@ -59,12 +59,11 @@ public class PetService {
     }
 
     public void deletePet(Long petId) {
-        var result = pets.remove(petId);
-        if (result == null) {
+        Pet pet = pets.remove(petId);
+        if (pet == null) {
             throw new ResourceNotFoundException("Pet", petId);
         }
 
-        Pet pet = findPetById(petId);
         User user = userService.findUserById(pet.getUserId());
         user.getPets().removeIf(p -> p.getId().equals(petId));
     }

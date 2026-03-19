@@ -22,7 +22,8 @@ public class UserService {
                 ++idCounter,
                 user.getName(),
                 user.getEmail(),
-                user.getAge()
+                user.getAge(),
+                new ArrayList<>()
         );
         users.put(newUser.getId(), newUser);
         return newUser;
@@ -50,7 +51,8 @@ public class UserService {
                 userId,
                 user.getName(),
                 user.getEmail(),
-                user.getAge()
+                user.getAge(),
+                oldUser.getPets()
         );
         users.put(userId, updatedUser);
         return updatedUser;
